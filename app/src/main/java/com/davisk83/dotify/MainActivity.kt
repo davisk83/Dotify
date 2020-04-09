@@ -49,18 +49,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         apply_button.setOnClickListener() {
-            apply_button.apply {
-                visibility = View.INVISIBLE
-            }
-            change_user_button.apply {
-                visibility = View.VISIBLE
-            }
-            new_username.apply {
-                visibility = View.INVISIBLE
-            }
-            username.apply {
-                visibility = View.VISIBLE
-                text = new_username.text
+            val message = new_username.text.toString()
+            if (message.trim().length > 0) {
+                apply_button.apply {
+                    visibility = View.INVISIBLE
+                }
+                change_user_button.apply {
+                    visibility = View.VISIBLE
+                }
+                new_username.apply {
+                    visibility = View.INVISIBLE
+                }
+                username.apply {
+                    visibility = View.VISIBLE
+                    text = new_username.text
+                }
+            } else {
+                Toast.makeText(this, "Error! Please enter username", Toast.LENGTH_SHORT).show()
             }
         }
     }

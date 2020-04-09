@@ -4,7 +4,7 @@ This is a prototype of a music player. The user can change user names and keep t
 times the song has been played.
 
 ## Extra credit
-I have completed extra credit #3, #4, and #5
+I have completed extra credit #1, #3, #4, and #5
 
 ## Screenshots
 <img src="./Dotify.png" alt="Screenshot of the app" height="500" />
