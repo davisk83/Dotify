@@ -7,6 +7,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 
+// Push Test
 class MainActivity : AppCompatActivity() {
     private var randomPlayCount = Random.nextInt(1, 100000000)
 
