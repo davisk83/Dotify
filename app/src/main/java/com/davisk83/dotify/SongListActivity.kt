@@ -14,8 +14,20 @@ class SongListActivity : AppCompatActivity() {
         title = "All Songs"
 
         val allSongs = SongDataProvider.getAllSongs()
+        val mutableSongs = allSongs.toMutableList()
 
         val songAdapter = SongListAdapter(allSongs)
         rvSongs.adapter = songAdapter
+
+        songAdapter.onSongClickListener = { songTitle, songArtist ->
+            tvSongID.text = getString(R.string.mini_player_text).format(songTitle, songArtist)
+        }
+
+        btnShuffle.setOnClickListener {
+            val newSongs = mutableSongs.apply {
+                shuffle()
+            }
+            songAdapter.change(newSongs)
+        }
     }
 }

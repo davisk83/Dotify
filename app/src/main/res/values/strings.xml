@@ -1,14 +1,16 @@
 <resources>
     <string name="app_name">Dotify</string>
     <string name="username">davisk83</string>
-    <string name="changeUserText">Change User</string>
-    <string name="applyText">Apply</string>
-    <string name="coverArtDesc">Song\'s Cover Art</string>
-    <string name="previousButton">Previous Button</string>
-    <string name="playButton">Play Button</string>
-    <string name="nextButton">Next Button</string>
-    <string name="songTitle">Strangers</string>
-    <string name="artistName">Seven Lions featuring Tove Lo, Myon, Shane 54</string>
-    <string name="inputUsername">Input new username here!</string>
-    <string name="initialPlayCount">%d plays</string>
+    <string name="change_user_text">Change User</string>
+    <string name="apply_text">Apply</string>
+    <string name="cover_art_desc">Song\'s Cover Art</string>
+    <string name="previous_button">Previous Button</string>
+    <string name="play_button">Play Button</string>
+    <string name="next_button">Next Button</string>
+    <string name="song_title">Strangers</string>
+    <string name="artist_name">Seven Lions featuring Tove Lo, Myon, Shane 54</string>
+    <string name="input_username">Input new username here!</string>
+    <string name="initial_play_count">%d plays</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="mini_player_text">%s - %s</string>
 </resources>

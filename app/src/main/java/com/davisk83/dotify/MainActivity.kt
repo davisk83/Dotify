@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        play_count.text = getString(R.string.initialPlayCount).format(randomPlayCount)
+        tvPlayCount.text = getString(R.string.initial_play_count).format(randomPlayCount)
 
         initPrevClick()
         initPlayClick()
@@ -24,43 +24,43 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initPrevClick() {
-        previous_button.setOnClickListener() {
+        ibPreviousButton.setOnClickListener() {
             Toast.makeText(this, "Skipping to previous track", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun initPlayClick() {
-        play_button.setOnClickListener() {
+        ibPlayButton.setOnClickListener() {
             randomPlayCount += 1
-            play_count.text = getString(R.string.initialPlayCount).format(randomPlayCount)
+            tvPlayCount.text = getString(R.string.initial_play_count).format(randomPlayCount)
         }
     }
 
     private fun initNextClick() {
-        next_button.setOnClickListener() {
+        ibNextButton.setOnClickListener() {
             Toast.makeText(this, "Skipping to next track", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun initChangeClick() {
-        change_user_button.setOnClickListener() {
-            username.visibility = View.INVISIBLE
-            new_username.visibility = View.VISIBLE
-            change_user_button.visibility = View.INVISIBLE
-            apply_button.visibility = View.VISIBLE
+        btnChangeUser.setOnClickListener() {
+            tvUsername.visibility = View.INVISIBLE
+            etNewUsername.visibility = View.VISIBLE
+            btnChangeUser.visibility = View.INVISIBLE
+            btnApply.visibility = View.VISIBLE
         }
     }
 
     private fun initApplyClick() {
-        apply_button.setOnClickListener() {
-            val message = new_username.text.toString()
+        btnApply.setOnClickListener() {
+            val message = etNewUsername.text.toString()
             if (message.trim().length > 0) {
-                apply_button.visibility = View.INVISIBLE
-                change_user_button.visibility = View.VISIBLE
-                new_username.visibility = View.INVISIBLE
-                username.apply {
+                btnApply.visibility = View.INVISIBLE
+                btnChangeUser.visibility = View.VISIBLE
+                etNewUsername.visibility = View.INVISIBLE
+                tvUsername.apply {
                     visibility = View.VISIBLE
-                    text = new_username.text
+                    text = etNewUsername.text
                 }
             } else {
                 Toast.makeText(this, "Error! Please enter username", Toast.LENGTH_SHORT).show()

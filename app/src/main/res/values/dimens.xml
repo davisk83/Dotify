@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="largeTextSize">30sp</dimen>
-    <dimen name="smallTextSize">15sp</dimen>
+    <dimen name="small_text_size">15sp</dimen>
+    <dimen name="large_text_size">30sp</dimen>
+    <dimen name="medium_padding_size">12dp</dimen>
+    <dimen name="large_padding_size">16dp</dimen>
+    <dimen name="small_margin_size">10dp</dimen>
+    <dimen name="medium_margin_size">12dp</dimen>
+    <dimen name="medium_max_width">250sp</dimen>
+    <dimen name="mini_player_height">60dp</dimen>
+    <dimen name="small_square_picture_size">70dp</dimen>
 </resources>
