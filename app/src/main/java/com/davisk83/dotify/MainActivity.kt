@@ -4,10 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.ericchee.songdataprovider.Song
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
+    companion object{
+        const val SONG_KEY = "SONG_KEY"
+    }
+
     private var randomPlayCount = Random.nextInt(1, 100000000)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,11 +21,19 @@ class MainActivity : AppCompatActivity() {
 
         tvPlayCount.text = getString(R.string.initial_play_count).format(randomPlayCount)
 
+        initSongID()
         initPrevClick()
         initPlayClick()
         initNextClick()
         initChangeClick()
         initApplyClick()
+    }
+
+    private fun initSongID() {
+        val song = intent.getParcelableExtra<Song>(SONG_KEY)
+        tvSongTitle.text = song.title
+        tvArtistName.text = song.artist
+        ivCoverArt.setImageResource(song.largeImageID)
     }
 
     private fun initPrevClick() {

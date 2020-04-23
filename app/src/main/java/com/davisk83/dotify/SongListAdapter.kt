@@ -14,6 +14,7 @@ class SongListAdapter(songs: List<Song>): RecyclerView.Adapter<SongListAdapter.S
     private var songs = songs.toList()
 
     var onSongClickListener: ((songTitle: String, songArtist: String) -> Unit)? = null
+    var onMiniPlayerClickListener: ((song: Song) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_song, parent,false)
@@ -24,7 +25,7 @@ class SongListAdapter(songs: List<Song>): RecyclerView.Adapter<SongListAdapter.S
 
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
         val song = songs[position]
-        holder.bind(song.smallImageID, song.title, song.artist)
+        holder.bind(song, song.smallImageID, song.title, song.artist)
     }
 
     fun change(newSongs: List<Song>) {
@@ -41,16 +42,18 @@ class SongListAdapter(songs: List<Song>): RecyclerView.Adapter<SongListAdapter.S
         private val tvArtistName by lazy {itemView.findViewById<TextView>(R.id.tvArtistName)}
 
         fun bind(
-            imageID: Int,
+            song: Song,
+            smallImageID: Int,
             songTitle: String,
             songArtist: String
         ) {
-            ivSongImage.setImageResource(imageID)
+            ivSongImage.setImageResource(smallImageID)
             tvSongTitle.text = songTitle
             tvArtistName.text = songArtist
 
             itemView.setOnClickListener {
                 onSongClickListener?.invoke(songTitle, songArtist)
+                onMiniPlayerClickListener?.invoke(song)
             }
         }
     }
