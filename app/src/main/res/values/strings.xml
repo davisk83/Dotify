@@ -14,4 +14,7 @@
     <string name="initial_play_count">%d plays</string>
     <string name="shuffle">Shuffle</string>
     <string name="mini_player_text">%s - %s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

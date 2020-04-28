@@ -1,15 +1,17 @@
-package com.davisk83.dotify
+package com.davisk83.dotify.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import com.davisk83.dotify.R
 import com.ericchee.songdataprovider.Song
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
+
     companion object{
         const val SONG_KEY = "SONG_KEY"
     }

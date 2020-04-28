@@ -1,9 +1,11 @@
-package com.davisk83.dotify
+package com.davisk83.dotify.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.davisk83.dotify.MainActivity.Companion.SONG_KEY
+import com.davisk83.dotify.R
+import com.davisk83.dotify.SongListAdapter
+import com.davisk83.dotify.activity.MainActivity.Companion.SONG_KEY
 import com.ericchee.songdataprovider.SongDataProvider
 import kotlinx.android.synthetic.main.activity_song_list.*
 
@@ -18,8 +20,8 @@ class SongListActivity : AppCompatActivity() {
 
         title = "All Songs"
 
-        initRecyclerView()
-        initShuffleClick()
+           initRecyclerView()
+           initShuffleClick()
     }
 
     private fun initRecyclerView() {

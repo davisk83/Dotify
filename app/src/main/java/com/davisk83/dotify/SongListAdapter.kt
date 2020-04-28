@@ -23,8 +23,8 @@ class SongListAdapter(songs: List<Song>): RecyclerView.Adapter<SongListAdapter.S
     override fun getItemCount(): Int = songs.size
 
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
-        val song = songs[position]
-        holder.bind(song)
+            val song = songs[position]
+            holder.bind(song)
     }
 
     fun change(newSongs: List<Song>) {
