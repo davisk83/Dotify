@@ -31,10 +31,10 @@ class SongListActivity : AppCompatActivity() {
         songAdapter.onSongClickListener = { song ->
             tvSongID.text = getString(R.string.mini_player_text).format(song.title, song.artist)
             songPlayer.putExtra(SONG_KEY, song)
-        }
 
-        clMiniPlayer.setOnClickListener {
-            startActivity(songPlayer)
+            clMiniPlayer.setOnClickListener {
+                startActivity(songPlayer)
+            }
         }
     }
 

@@ -5,57 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".activity.MainActivity"
     android:padding="@dimen/large_padding_size">
-
-    <TextView
-        android:id="@+id/tvUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/small_text_size"
-        android:text="@string/default_username"
-        tools:text="@string/username"
-        app:layout_constraintTop_toTopOf="@id/btnChangeUser"
-        app:layout_constraintBottom_toBottomOf="@id/btnChangeUser"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <EditText
-        android:id="@+id/etNewUsername"
-        android:hint="@string/input_username"
-        android:inputType="text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/small_text_size"
-        android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="@id/btnChangeUser"
-        app:layout_constraintBottom_toBottomOf="@id/btnChangeUser"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <Button
-        android:id="@+id/btnChangeUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/small_text_size"
-        android:text="@string/change_user_text"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-
-    <Button
-        android:id="@+id/btnApply"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/small_text_size"
-        android:text="@string/apply_text"
-        android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrierUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="tvUsername,btnChangeUser"/>
 
     <ImageView
         android:id="@+id/ivCoverArt"
@@ -65,7 +19,7 @@
         android:layout_marginTop="@dimen/small_margin_size"
         android:src="@drawable/unknown"
         android:contentDescription="@string/cover_art_desc"
-        app:layout_constraintTop_toBottomOf="@id/barrierUsername"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
@@ -74,6 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/song_title"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textSize="@dimen/large_text_size"
         app:layout_constraintTop_toBottomOf="@id/ivCoverArt"
         app:layout_constraintLeft_toLeftOf="parent"
