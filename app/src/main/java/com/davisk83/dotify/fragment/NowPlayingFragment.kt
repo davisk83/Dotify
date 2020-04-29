@@ -19,6 +19,7 @@ class NowPlayingFragment : Fragment() {
     companion object {
         val TAG: String = NowPlayingFragment::class.java.simpleName
         const val ARG_SONG = "arg_song"
+//        private const val OUT_COUNT = "out_count"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +31,21 @@ class NowPlayingFragment : Fragment() {
                 this.song = song
             }
         }
+
+//        if (savedInstanceState != null) {
+//            with(savedInstanceState) {
+//                randomPlayCount = getInt(OUT_COUNT, -1)
+//            }
+//        } else {
+//            randomPlayCount = Random.nextInt(1, 100000000)
+//        }
     }
+
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        outState.putInt(OUT_COUNT, randomPlayCount)
+//
+//        super.onSaveInstanceState(outState)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
