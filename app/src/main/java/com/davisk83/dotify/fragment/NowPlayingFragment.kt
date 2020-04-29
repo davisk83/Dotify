@@ -17,6 +17,7 @@ class NowPlayingFragment : Fragment() {
     private var randomPlayCount = Random.nextInt(1, 100000000)
 
     companion object {
+        val TAG: String = NowPlayingFragment::class.java.simpleName
         const val ARG_SONG = "arg_song"
     }
 

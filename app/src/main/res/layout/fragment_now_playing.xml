@@ -5,9 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:clickable="true"
-    android:focusable="true"
+
     tools:context=".activity.MainActivity"
     android:padding="@dimen/large_padding_size">
 
@@ -16,7 +14,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1:1"
-        android:layout_marginTop="@dimen/small_margin_size"
         android:src="@drawable/unknown"
         android:contentDescription="@string/cover_art_desc"
         app:layout_constraintTop_toTopOf="parent"

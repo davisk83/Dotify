@@ -8,13 +8,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.davisk83.dotify.R
 import com.davisk83.dotify.SongListAdapter
+import com.davisk83.dotify.activity.UltimateMainActivity
 import com.ericchee.songdataprovider.Song
 import kotlinx.android.synthetic.main.fragment_song_list.*
 
 class SongListFragment(allSongs: List<Song>) : Fragment() {
 
     private val songAdapter = SongListAdapter(allSongs)
-    private var onSongClickListener: OnSongClickListener? = null
+    private lateinit var onSongClickListener: OnSongClickListener
+
+    companion object {
+        val TAG: String = SongListFragment::class.java.simpleName
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -42,8 +47,16 @@ class SongListFragment(allSongs: List<Song>) : Fragment() {
         rvSongs.adapter = songAdapter
 
         songAdapter.onSongClickListener = { song ->
-            onSongClickListener?.onSongClicked(song)
+            onSongClickListener.onSongClicked(song)
         }
+    }
+
+    fun shuffleList() {
+        val newSongs = UltimateMainActivity.allSongs.toMutableList().apply {
+            shuffle()
+        }
+        songAdapter.change(newSongs)
+        rvSongs.scrollToPosition(0)
     }
 }
 

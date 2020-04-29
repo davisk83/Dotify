@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+
     tools:context=".activity.SongListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -16,6 +16,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:listitem="@layout/item_song" />
+        tools:listitem="@layout/item_song"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

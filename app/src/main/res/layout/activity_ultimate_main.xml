@@ -17,7 +17,8 @@
         app:layout_constraintRight_toRightOf="parent">
     </FrameLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/clMiniPlayer"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clMiniPlayer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mini_player_height"
         android:background="@color/color_primary"
@@ -32,24 +33,24 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/small_margin_size"
             android:text="@string/shuffle"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvSongID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:maxLines="2"
-            android:maxWidth="@dimen/medium_max_width"
             android:ellipsize="end"
-            tools:text="Song Title - Artist Name"
             android:gravity="center_horizontal"
-            app:layout_constraintTop_toTopOf="parent"
+            android:maxWidth="@dimen/medium_max_width"
+            android:maxLines="2"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/btnShuffle"/>
+            app:layout_constraintRight_toLeftOf="@id/btnShuffle"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Song Title - Artist Name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
