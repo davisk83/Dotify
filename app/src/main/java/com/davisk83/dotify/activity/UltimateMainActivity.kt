@@ -25,37 +25,27 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ultimate_main)
 
-        initMiniPlayer()
-        initRecyclerView()
-        initShuffleBtn()
+        initActivity()
+        addFragmentBackButton()
+        checkSaveInstanceState(savedInstanceState)
+    }
 
-        supportFragmentManager.addOnBackStackChangedListener {
-            val hasBackStack = supportFragmentManager.backStackEntryCount > 0
-
-            if (hasBackStack) {
-                supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            } else {
-                supportActionBar?.setDisplayHomeAsUpEnabled(false)
-            }
-        }
-
-        if (savedInstanceState != null) {
-            with(savedInstanceState) {
-                song = this.getParcelable(OUT_SONG)
-                song?.let {
-                    onSongClicked(it)
-                }
-            }
+    private fun initActivity() {
+        // check if now playing fragment is showing
+        val nowPlayingFragment = getNowPlayingFragment()
+        if (nowPlayingFragment != null) {
+            clMiniPlayer.visibility = View.GONE
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        } else {
+            nullMiniPlayerCheck()
+            initRecyclerView()
+            initShuffleBtn()
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        supportFragmentManager.popBackStack()
-        clMiniPlayer.visibility = View.VISIBLE
-        return super.onNavigateUp()
-    }
+    private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(NowPlayingFragment.TAG) as? NowPlayingFragment
 
-    private fun initMiniPlayer() {
+    private fun nullMiniPlayerCheck() {
         clMiniPlayer.setOnClickListener {
             Toast.makeText(this, "Select a song", Toast.LENGTH_SHORT).show()
         }
@@ -74,13 +64,51 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
                 .beginTransaction()
                 .add(R.id.flFragContainer, listSongFragment, SongListFragment.TAG)
                 .commit()
-         }
+        }
     }
+
+    private fun getSongListFragment() = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
 
     private fun initShuffleBtn() {
         btnShuffle.setOnClickListener {
             getSongListFragment()?.shuffleList()
         }
+    }
+
+    private fun addFragmentBackButton() {
+        supportFragmentManager.addOnBackStackChangedListener {
+            val hasBackStack = supportFragmentManager.backStackEntryCount > 0
+
+            if (hasBackStack) {
+                supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            } else {
+                supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            }
+        }
+    }
+
+    private fun checkSaveInstanceState(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                song = this.getParcelable(OUT_SONG)
+                song?.let {
+                    onSongClicked(it)
+                }
+            }
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        supportFragmentManager.popBackStack()
+        clMiniPlayer.visibility = View.VISIBLE
+        initShuffleBtn()
+        return super.onNavigateUp()
+    }
+
+    override fun onBackPressed() {
+        clMiniPlayer.visibility = View.VISIBLE
+        initShuffleBtn()
+        super.onBackPressed()
     }
 
     override fun onSongClicked(song: Song) {
@@ -100,20 +128,13 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
         songDetailFragment.arguments = argumentBundle
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.flFragContainer, songDetailFragment)
+            .replace(R.id.flFragContainer, songDetailFragment, NowPlayingFragment.TAG)
             .addToBackStack(NowPlayingFragment.TAG)
             .commit()
-    }
-
-    override fun onBackPressed() {
-        clMiniPlayer.visibility = View.VISIBLE
-        super.onBackPressed()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putParcelable(OUT_SONG, song)
         super.onSaveInstanceState(outState)
     }
-
-    private fun getSongListFragment() = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
 }

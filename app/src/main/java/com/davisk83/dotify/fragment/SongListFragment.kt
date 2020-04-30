@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_song_list.*
 class SongListFragment() : Fragment() {
 
     private lateinit var allSongs: List<Song>
-    private lateinit var newSongs: ArrayList<Song>
+    private lateinit var newSongs: ArrayList<Song> // for saved instance state
     private lateinit var songAdapter: SongListAdapter
     private lateinit var onSongClickListener: OnSongClickListener
 
@@ -24,16 +24,32 @@ class SongListFragment() : Fragment() {
         private const val OUT_SONG_LIST = "out_song_list"
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is OnSongClickListener) {
+            onSongClickListener = context
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initListOfSongs()
+        checkSaveInstanceState(savedInstanceState)
+    }
+
+    private fun initListOfSongs() {
         arguments?.let { args ->
             val allSongs = args.getParcelableArrayList<Song>(ARG_SONG_LIST)
             if (allSongs != null) {
                 this.allSongs = allSongs.toList()
+                newSongs = allSongs // safe check to avoid null pointer exception
             }
         }
+    }
 
+    private fun checkSaveInstanceState(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
             with(savedInstanceState) {
                 newSongs = getParcelableArrayList<Song>(OUT_SONG_LIST) as ArrayList<Song>
@@ -41,14 +57,6 @@ class SongListFragment() : Fragment() {
             }
         } else {
             songAdapter = SongListAdapter(allSongs)
-        }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        if (context is OnSongClickListener) {
-            onSongClickListener = context
         }
     }
 
@@ -78,7 +86,7 @@ class SongListFragment() : Fragment() {
         val newSongs = allSongs.toMutableList().apply {
             shuffle()
         }
-        this.newSongs = newSongs as ArrayList<Song>
+        this.newSongs = newSongs as ArrayList<Song> // for saved instance state
         songAdapter.change(newSongs)
         rvSongs.scrollToPosition(0)
     }
