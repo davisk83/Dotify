@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:gravity="center_horizontal"
-            android:maxWidth="@dimen/medium_max_width"
+            android:maxWidth="@dimen/large_max_width"
             android:maxLines="2"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

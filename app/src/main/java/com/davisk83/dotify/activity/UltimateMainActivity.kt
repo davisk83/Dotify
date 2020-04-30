@@ -11,12 +11,14 @@ import com.davisk83.dotify.fragment.SongListFragment
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
 import kotlinx.android.synthetic.main.activity_ultimate_main.*
-import kotlinx.android.synthetic.main.fragment_song_list.*
 
 class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
 
+    private val allSongs = SongDataProvider.getAllSongs()
+    private var song: Song? = null
+
     companion object {
-        val allSongs = SongDataProvider.getAllSongs()
+        private const val OUT_SONG = "out_song"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,12 +38,20 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
                 supportActionBar?.setDisplayHomeAsUpEnabled(false)
             }
         }
+
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                song = this.getParcelable(OUT_SONG)
+                song?.let {
+                    onSongClicked(it)
+                }
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         supportFragmentManager.popBackStack()
         clMiniPlayer.visibility = View.VISIBLE
-        rvSongs.visibility = View.VISIBLE
         return super.onNavigateUp()
     }
 
@@ -52,14 +62,20 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
     }
 
     private fun initRecyclerView() {
-        val listSongFragment = SongListFragment(allSongs)
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.flFragContainer, listSongFragment, SongListFragment.TAG)
-            .commit()
+        var listSongFragment = getSongListFragment()
+        if (listSongFragment == null) {
+            val songArrayList: ArrayList<Song> = allSongs as ArrayList<Song>
+            listSongFragment = SongListFragment()
+            val argumentBundle = Bundle().apply {
+                putParcelableArrayList(SongListFragment.ARG_SONG_LIST, songArrayList)
+            }
+            listSongFragment.arguments = argumentBundle
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.flFragContainer, listSongFragment, SongListFragment.TAG)
+                .commit()
+         }
     }
-
-    private fun getSongListFragment() = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
 
     private fun initShuffleBtn() {
         btnShuffle.setOnClickListener {
@@ -68,6 +84,7 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
     }
 
     override fun onSongClicked(song: Song) {
+        this.song = song
         tvSongID.text = getString(R.string.mini_player_text).format(song.title, song.artist)
         clMiniPlayer.setOnClickListener {
             showNowPlayingFragment(song)
@@ -76,7 +93,6 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
 
     private fun showNowPlayingFragment(song: Song) {
         clMiniPlayer.visibility = View.GONE
-        rvSongs.visibility = View.GONE
         val songDetailFragment = NowPlayingFragment()
         val argumentBundle = Bundle().apply {
             putParcelable(NowPlayingFragment.ARG_SONG, song)
@@ -84,14 +100,20 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
         songDetailFragment.arguments = argumentBundle
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.flFragContainer, songDetailFragment)
+            .replace(R.id.flFragContainer, songDetailFragment)
             .addToBackStack(NowPlayingFragment.TAG)
             .commit()
     }
 
     override fun onBackPressed() {
         clMiniPlayer.visibility = View.VISIBLE
-        rvSongs.visibility = View.VISIBLE
         super.onBackPressed()
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelable(OUT_SONG, song)
+        super.onSaveInstanceState(outState)
+    }
+
+    private fun getSongListFragment() = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
 }

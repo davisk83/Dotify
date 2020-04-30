@@ -8,17 +8,40 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.davisk83.dotify.R
 import com.davisk83.dotify.SongListAdapter
-import com.davisk83.dotify.activity.UltimateMainActivity
 import com.ericchee.songdataprovider.Song
 import kotlinx.android.synthetic.main.fragment_song_list.*
 
-class SongListFragment(allSongs: List<Song>) : Fragment() {
+class SongListFragment() : Fragment() {
 
-    private val songAdapter = SongListAdapter(allSongs)
+    private lateinit var allSongs: List<Song>
+    private lateinit var newSongs: ArrayList<Song>
+    private lateinit var songAdapter: SongListAdapter
     private lateinit var onSongClickListener: OnSongClickListener
 
     companion object {
+        const val ARG_SONG_LIST = "arg_song_list"
         val TAG: String = SongListFragment::class.java.simpleName
+        private const val OUT_SONG_LIST = "out_song_list"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let { args ->
+            val allSongs = args.getParcelableArrayList<Song>(ARG_SONG_LIST)
+            if (allSongs != null) {
+                this.allSongs = allSongs.toList()
+            }
+        }
+
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                newSongs = getParcelableArrayList<Song>(OUT_SONG_LIST) as ArrayList<Song>
+                songAdapter = SongListAdapter(newSongs)
+            }
+        } else {
+            songAdapter = SongListAdapter(allSongs)
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -52,11 +75,18 @@ class SongListFragment(allSongs: List<Song>) : Fragment() {
     }
 
     fun shuffleList() {
-        val newSongs = UltimateMainActivity.allSongs.toMutableList().apply {
+        val newSongs = allSongs.toMutableList().apply {
             shuffle()
         }
+        this.newSongs = newSongs as ArrayList<Song>
         songAdapter.change(newSongs)
         rvSongs.scrollToPosition(0)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(OUT_SONG_LIST, newSongs)
+
+        super.onSaveInstanceState(outState)
     }
 }
 
