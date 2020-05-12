@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.davisk83.dotify.DotifyApp
 import com.davisk83.dotify.R
 import com.davisk83.dotify.fragment.NowPlayingFragment
 import com.davisk83.dotify.fragment.OnSongClickListener
@@ -115,6 +116,7 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
         this.song = song
         tvSongID.text = getString(R.string.mini_player_text).format(song.title, song.artist)
         clMiniPlayer.setOnClickListener {
+            (applicationContext as? DotifyApp)?.onSongClicked()
             showNowPlayingFragment(song)
         }
     }

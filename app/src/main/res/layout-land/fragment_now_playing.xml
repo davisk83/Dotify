@@ -18,16 +18,39 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <ImageView
+        android:id="@+id/ivProfilePic"
+        android:layout_width="@dimen/small_profile_pic_size"
+        android:layout_height="@dimen/small_profile_pic_size"
+        android:paddingStart="@dimen/medium_padding_size"
+        android:src="@drawable/unknown_small"
+        android:contentDescription="@string/profile_picture"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ivCoverArt"/>
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_padding_size"
+        android:textSize="@dimen/small_text_size"
+        android:text="@string/default_username"
+        tools:text="Username"
+        app:layout_constraintTop_toTopOf="@id/ivProfilePic"
+        app:layout_constraintLeft_toRightOf="@id/ivProfilePic"
+        app:layout_constraintBottom_toBottomOf="@id/ivProfilePic"/>
+
     <TextView
         android:id="@+id/tvSongTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin_size"
         android:text="@string/song_title"
         android:maxLines="1"
         android:ellipsize="end"
         android:maxWidth="@dimen/medium_max_width"
         android:textSize="@dimen/large_text_size"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivProfilePic"
         app:layout_constraintLeft_toRightOf="@id/ivCoverArt"
         app:layout_constraintRight_toRightOf="parent"/>
 

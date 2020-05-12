@@ -10,4 +10,5 @@
     <dimen name="large_max_width">600sp</dimen>
     <dimen name="mini_player_height">60dp</dimen>
     <dimen name="small_square_picture_size">70dp</dimen>
+    <dimen name="small_profile_pic_size">60dp</dimen>
 </resources>
